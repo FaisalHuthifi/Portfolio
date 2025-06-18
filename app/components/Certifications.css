@@ -1,0 +1,79 @@
+.certifications-section {
+  padding: 2rem;
+  margin: 2rem 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 30px;
+}
+
+.certifications-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.certifications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.certification-item {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.certification-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-5px);
+}
+
+.certification-name {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+.certification-meta {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 1.1rem;
+  color: #cec6b3;
+}
+
+.certification-issuer {
+  font-weight: 500;
+}
+
+.certification-date {
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+  .certifications-list {
+    gap: 1rem;
+  }
+  .certification-item {
+    padding: 1rem;
+  }
+  .certification-name {
+    font-size: 1.1rem;
+  }
+  .certification-meta {
+    font-size: 1rem;
+  }
+} 

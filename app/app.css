@@ -1,0 +1,224 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css');
+@import "tailwindcss";
+
+:root {
+  --primary-color: #cec6b3;
+  --text-color: #d1d1d1;
+  --background-color: #000000;
+  --card-background: rgba(255, 255, 255, 0.05);
+  --transition-speed: 0.3s;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Playfair Display', serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  overflow-x: hidden;
+}
+
+.app {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.aurora-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+  background: #000;
+}
+
+.aurora {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  background: radial-gradient(
+    circle at center,
+    rgba(93, 103, 79, 0.4) 0%,
+    rgba(164, 137, 110, 0.3) 25%,
+    rgba(33, 52, 85, 0.2) 50%,
+    transparent 70%
+  );
+  animation: aurora 20s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.aurora::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at center,
+    rgba(164, 137, 110, 0.4) 0%,
+    rgba(33, 52, 85, 0.3) 25%,
+    rgba(93, 103, 79, 0.2) 50%,
+    transparent 70%
+  );
+  animation: aurora 15s ease-in-out infinite reverse;
+  transform-origin: center;
+}
+
+.aurora::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at center,
+    rgba(33, 52, 85, 0.4) 0%,
+    rgba(93, 103, 79, 0.3) 25%,
+    rgba(164, 137, 110, 0.2) 50%,
+    transparent 70%
+  );
+  animation: aurora 25s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes aurora {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.2);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+.nav-wrapper {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0 20px;
+}
+
+.nav-content {
+  display: flex;
+  gap: 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  padding: 0.5rem;
+  border-radius: 50px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.nav-button {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+  border-radius: 25px;
+  font-weight: 500;
+  font-family: 'Playfair Display', serif;
+}
+
+.nav-button:hover {
+  background: rgba(74, 144, 226, 0.2);
+}
+
+.nav-button.active {
+  background: #4a90e2;
+  color: white;
+}
+
+.main-content {
+  position: relative;
+  z-index: 1;
+  padding: 80px 20px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.loading-content {
+  text-align: center;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid var(--primary-color);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .nav-content {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .nav-button {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .main-content {
+    padding: 100px 15px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-wrapper {
+    top: 10px;
+  }
+
+  .nav-content {
+    padding: 0.3rem;
+  }
+
+  .nav-button {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.6rem;
+  }
+}

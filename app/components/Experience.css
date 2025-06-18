@@ -1,0 +1,81 @@
+.experience-section {
+  padding: 2rem;
+  margin: 2rem 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 30px;
+}
+
+.experience-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.experience-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.experience-item {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.experience-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-5px);
+}
+
+.experience-role {
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 0.7rem;
+}
+
+.experience-meta {
+  display: flex;
+  gap: 2rem;
+  font-size: 1.2rem;
+  color: #cec6b3;
+  margin-bottom: 0.7rem;
+}
+
+.experience-description {
+  color: #d1d1d1;
+  font-size: 1.25rem;
+  margin: 0 0 0.5rem 0;
+}
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+  .experience-list {
+    gap: 1rem;
+  }
+  .experience-item {
+    padding: 1rem;
+  }
+  .experience-role {
+    font-size: 1.3rem;
+  }
+  .experience-meta {
+    font-size: 1rem;
+  }
+  .experience-description {
+    font-size: 1.05rem;
+  }
+} 
