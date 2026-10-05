@@ -13,6 +13,8 @@ interface Project {
   presentation?: string;
   detailIntro?: string;
   example?: { intent: string; before: string; after: string }[];
+  slug?: string;
+  aliases?: string[];
 }
 
 const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
@@ -47,6 +49,7 @@ const projects: Project[] = [
     image: LOCI_ICON,
     video: asset('projects/loci/appvideo.mp4'),
     presentation: asset('projects/loci/Loci.pdf'),
+    slug: 'loci',
   },
   {
     title: 'Oops',
@@ -65,6 +68,8 @@ const projects: Project[] = [
       'Runs fully offline with no installer',
     ],
     technologies: ['C#', '.NET 8', 'WPF', 'Windows Forms', 'Win32', 'UI Automation'],
+    slug: 'oops',
+    aliases: ['keyfix'],
   },
   {
     title: 'Smart Parking System',
@@ -98,6 +103,21 @@ const projects: Project[] = [
     technologies: ['React', 'TypeScript', 'CSS', 'HTML', 'Vite'],
   },
 ];
+
+function findProjectBySlug(slug: string): Project | undefined {
+  const key = slug.toLowerCase();
+  return projects.find((project) => project.slug === key || project.aliases?.includes(key));
+}
+
+export function projectAnchorId(slug: string): string | null {
+  const project = findProjectBySlug(slug);
+  return project?.slug ? `project-${project.slug}` : null;
+}
+
+export function isProjectDetailSlug(slug: string): boolean {
+  const project = findProjectBySlug(slug);
+  return Boolean(project?.video || project?.presentation);
+}
 
 function ProjectDetailModal({
   project,
@@ -200,10 +220,27 @@ function ProjectDetailModal({
   );
 }
 
-const Projects: React.FC = () => {
+const Projects: React.FC<{
+  projectSlug?: string | null;
+  onOpenProject?: (slug: string) => void;
+  onCloseProject?: () => void;
+}> = ({ projectSlug = null, onOpenProject, onCloseProject }) => {
   const [detailProject, setDetailProject] = useState<Project | null>(null);
 
-  const closeDetail = useCallback(() => setDetailProject(null), []);
+  const closeDetail = useCallback(() => {
+    if (onCloseProject) onCloseProject();
+    else setDetailProject(null);
+  }, [onCloseProject]);
+
+  useEffect(() => {
+    if (!projectSlug) {
+      setDetailProject(null);
+      return;
+    }
+    const project = findProjectBySlug(projectSlug);
+    if (project && (project.video || project.presentation)) setDetailProject(project);
+    else setDetailProject(null);
+  }, [projectSlug]);
 
   useEffect(() => {
     if (!detailProject) return;
@@ -219,9 +256,9 @@ const Projects: React.FC = () => {
   }, [detailProject, closeDetail]);
 
   const openDetail = (project: Project) => {
-    if (project.video || project.presentation) {
-      setDetailProject(project);
-    }
+    if (!(project.video || project.presentation) || !project.slug) return;
+    if (onOpenProject) onOpenProject(project.slug);
+    else setDetailProject(project);
   };
 
   const isClickable = (project: Project) => Boolean(project.video || project.presentation);
@@ -240,7 +277,8 @@ const Projects: React.FC = () => {
         <div className="projects-grid">
           {projects.map((project, index) => (
             <div
-              key={index}
+              key={project.slug ?? project.title}
+              id={project.slug ? `project-${project.slug}` : undefined}
               className={`project-card${isClickable(project) ? ' project-card--clickable' : ''}`}
               role={isClickable(project) ? 'button' : undefined}
               tabIndex={isClickable(project) ? 0 : undefined}

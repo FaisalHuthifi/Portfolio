@@ -9,7 +9,7 @@ if (!root) throw new Error('Root element not found')
 
 ReactDOM.createRoot(root).render(
   <React.StrictMode>
-    <BrowserRouter basename="/Portfolio">
+    <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, "")}>
       <App />
     </BrowserRouter>
   </React.StrictMode>,
