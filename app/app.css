@@ -150,6 +150,30 @@ body {
   color: white;
 }
 
+.nav-divider {
+  display: inline-block;
+  width: 2px;
+  height: 28px;
+  background: rgba(255,255,255,0.15);
+  margin: 0 1rem;
+  border-radius: 2px;
+  align-self: center;
+}
+
+.nav-resume {
+  background: rgba(206, 198, 179, 0.12);
+  color: #cec6b3;
+  font-weight: 600;
+  border: 1px solid rgba(206, 198, 179, 0.18);
+  transition: all 0.3s;
+}
+
+.nav-resume:hover {
+  background: #cec6b3;
+  color: #222;
+  border-color: #cec6b3;
+}
+
 .main-content {
   position: relative;
   z-index: 1;

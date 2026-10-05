@@ -1,5 +1,7 @@
 import React from 'react';
 import './About.css';
+// @ts-ignore
+import emailjs from 'emailjs-com';
 
 const About: React.FC = () => {
   return (
@@ -20,7 +22,7 @@ const About: React.FC = () => {
             </p>
             <div className="stats-container">
               <div className="stat-item">
-                <h4>2+</h4>
+                <h4>3+</h4>
                 <p>Projects Completed</p>
               </div>
               <div className="stat-item">
@@ -32,7 +34,7 @@ const About: React.FC = () => {
           <div className="about-image">
             <div className="image-container">
               {
-                <img src="public\Pfai.PNG" alt="About" />
+                <img src={`${import.meta.env.BASE_URL}Fai.png`} alt="About" />
               }
               <div className="image-placeholder">
                 <span>Your Photo</span>

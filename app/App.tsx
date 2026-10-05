@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Routes, Route } from 'react-router-dom';
 import Aurora from "./components/Aurora";
 import About from "./components/About";
 import Skills from "./components/Skills";
@@ -70,26 +71,45 @@ export default function App() {
               {section.label}
             </motion.button>
           ))}
+          {/* Divider before Resume */}
+          <span className="nav-divider" aria-hidden="true"></span>
+          {/* Resume Download Link */}
+          <a
+            href="/Portfolio/Faisal Alhuthifii CV.pdf"
+            className="nav-button nav-resume"
+            download="Faisal_Alhuthifii_CV.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span style={{ marginRight: '0.5rem' }}>
+              <i className="fas fa-file-download"></i>
+            </span>
+            Resume
+          </a>
         </div>
       </nav>
 
       <main className="main-content">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeSection}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}
-          >
-            {activeSection === "about" && <About />}
-            {activeSection === "skills" && <Skills />}
-            {activeSection === "experience" && <Experience />}
-            {activeSection === "certifications" && <Certifications />}
-            {activeSection === "projects" && <Projects />}
-            {activeSection === "contact" && <Contact />}
-          </motion.div>
-        </AnimatePresence>
+        <Routes>
+          <Route path="/" element={
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeSection}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
+              >
+                {activeSection === "about" && <About />}
+                {activeSection === "skills" && <Skills />}
+                {activeSection === "experience" && <Experience />}
+                {activeSection === "certifications" && <Certifications />}
+                {activeSection === "projects" && <Projects />}
+                {activeSection === "contact" && <Contact />}
+              </motion.div>
+            </AnimatePresence>
+          } />
+        </Routes>
       </main>
     </div>
   );
